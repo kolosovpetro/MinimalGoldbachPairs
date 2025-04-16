@@ -4,8 +4,10 @@ internal static class Program
 {
     public static void Main(string[] args)
     {
-        var primeSieve = EratosthenesSieve.SieveOfEratosthenes(1_000_000);
-        EratosthenesSieve.SerializeSieve(primeSieve);
+        // var primeSieve = EratosthenesSieve.SieveOfEratosthenes(1_000_000);
+        // EratosthenesSieve.SerializeSieve(primeSieve);
+
+        var deserializeSieve = EratosthenesSieve.DeserializeSieve();
 
         var primes = EratosthenesSieve.PrimesList(50).ToList();
 

@@ -78,4 +78,16 @@ public static class EratosthenesSieve
 
         Console.WriteLine($"Sieve saved to: {filePath}");
     }
+
+    public static bool[] DeserializeSieve()
+    {
+        // Get the root path (relative to your project's root when debugging)
+        var fileName = "sieve.json";
+        var filePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", fileName);
+        filePath = Path.GetFullPath(filePath);
+        
+        bool[] loadedSieve = JsonSerializer.Deserialize<bool[]>(File.ReadAllText(filePath));
+
+        return loadedSieve;
+    }
 }
