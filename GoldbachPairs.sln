@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldbachPairs.Run", "GoldbachPairs.Run\GoldbachPairs.Run.csproj", "{A3B374DC-6647-4228-9079-CFE9E652EBB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldbachPairs.Tests", "GoldbachPairs.Tests\GoldbachPairs.Tests.csproj", "{A1441187-82E4-4389-940C-A0ED5993FFF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{A3B374DC-6647-4228-9079-CFE9E652EBB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B374DC-6647-4228-9079-CFE9E652EBB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B374DC-6647-4228-9079-CFE9E652EBB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1441187-82E4-4389-940C-A0ED5993FFF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1441187-82E4-4389-940C-A0ED5993FFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1441187-82E4-4389-940C-A0ED5993FFF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1441187-82E4-4389-940C-A0ED5993FFF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4F59DF04-64F5-45F1-9767-F88CA7C1B8E5} = {6E8508F0-6477-4C41-B8A0-BC3F27B6ABF9}
