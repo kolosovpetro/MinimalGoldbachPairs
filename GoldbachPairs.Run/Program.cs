@@ -36,7 +36,7 @@ internal static class Program
         for (var i = 1; i < 9; i++)
         {
             var pow = (int)Math.Pow(10, i);
-            var t = GoldbachHelper.CountMinPairs(pow, 3) - GoldbachHelper.CountMinPairs(pow, 5);
+            var t = GoldbachHelper.CountMinPairs(pow + 3, 3) - GoldbachHelper.CountMinPairs(pow+5, 5);
             list.Add(t);
         }
 

@@ -31,7 +31,7 @@ public static class GoldbachHelper
             }
 
             dictionary.Add(key, list.ToArray());
-            
+
             list.Clear();
         }
 
@@ -68,7 +68,7 @@ public static class GoldbachHelper
             }
 
             dictionary.Add(key, list.ToArray());
-            
+
             list.Clear();
         }
 
