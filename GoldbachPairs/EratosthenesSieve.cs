@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace GoldbachPairs;
 
 public static class EratosthenesSieve
 {
+    private static readonly JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
     public static bool[] SieveOfEratosthenes(int upperBound)
     {
         var primes = new bool[upperBound + 1];
@@ -59,5 +63,19 @@ public static class EratosthenesSieve
                 yield return i;
             }
         }
+    }
+
+    public static void SerializeSieve(bool[] sieve)
+    {
+        // Get the root path (relative to your project's root when debugging)
+        var fileName = "sieve.json";
+        var filePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", fileName);
+        filePath = Path.GetFullPath(filePath);
+        
+        // Serialize and write to file
+        var json = JsonSerializer.Serialize(sieve, options);
+        File.WriteAllText(filePath, json);
+
+        Console.WriteLine($"Sieve saved to: {filePath}");
     }
 }
