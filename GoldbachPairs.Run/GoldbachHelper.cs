@@ -91,4 +91,13 @@ public static class GoldbachHelper
 
         return count;
     }
+
+    public static int CountPrimesSieve(int bound)
+    {
+        var primes = EratosthenesSieve.SieveOfEratosthenes(bound);
+
+        var count = primes.Count(x => x);
+
+        return count;
+    }
 }

@@ -13,6 +13,9 @@ public static class EratosthenesSieve
             primes[i] = true;
         }
 
+        primes[0] = false;
+        primes[1] = false;
+
         for (var p = 2; p * p < upperBound; p++)
         {
             if (!primes[p])
@@ -23,6 +26,22 @@ public static class EratosthenesSieve
             for (var i = p * p; i < upperBound; i += p)
             {
                 primes[i] = false;
+            }
+        }
+
+        for (var i = 0; i < primes.Length - 1; i++)
+        {
+            var lastItem = upperBound;
+
+            if (!primes[i])
+            {
+                continue;
+            }
+
+            if (lastItem % i == 0)
+            {
+                primes[lastItem] = false;
+                break;
             }
         }
 
