@@ -15,11 +15,29 @@ internal static class Program
 
         var list = new List<int>();
 
+        Console.WriteLine("PI(N) sequence");
+
         for (int i = 5; i <= 100; i++)
         {
             var p = GoldbachHelper.CountMinPairs(i, 3) + 1;
-            
+
             list.Add(p);
+        }
+
+        foreach (var i in list)
+        {
+            Console.Write($"{i}, ");
+        }
+
+        Console.WriteLine();
+        Console.WriteLine();
+        list.Clear();
+
+        for (var i = 1; i < 9; i++)
+        {
+            var pow = (int)Math.Pow(10, i);
+            var t = GoldbachHelper.CountMinPairs(pow, 3) - GoldbachHelper.CountMinPairs(pow, 5);
+            list.Add(t);
         }
 
         foreach (var i in list)
