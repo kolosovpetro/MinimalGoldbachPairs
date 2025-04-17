@@ -8,6 +8,12 @@ namespace GoldbachPairs;
 public static class EratosthenesSieve
 {
     private static readonly JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+    
+    private const string fileName = "../../../../sieve.json";
+    
+    private static readonly string filePath = Path.Combine(AppContext.BaseDirectory, fileName);
+    
+    
     public static bool[] SieveOfEratosthenes(int upperBound)
     {
         var primes = new bool[upperBound + 1];
@@ -67,26 +73,17 @@ public static class EratosthenesSieve
 
     public static void SerializeSieve(bool[] sieve)
     {
-        // Get the root path (relative to your project's root when debugging)
-        var fileName = "sieve.json";
-        var filePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", fileName);
-        filePath = Path.GetFullPath(filePath);
-        
-        // Serialize and write to file
+        var sieveFilePath = Path.GetFullPath(filePath);
         var json = JsonSerializer.Serialize(sieve, options);
-        File.WriteAllText(filePath, json);
-
+        File.WriteAllText(sieveFilePath, json);
         Console.WriteLine($"Sieve saved to: {filePath}");
     }
 
     public static bool[] DeserializeSieve()
     {
-        // Get the root path (relative to your project's root when debugging)
-        var fileName = "sieve.json";
-        var filePath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", fileName);
-        filePath = Path.GetFullPath(filePath);
+        var sieveFilePath = Path.GetFullPath(filePath);
         
-        bool[] loadedSieve = JsonSerializer.Deserialize<bool[]>(File.ReadAllText(filePath));
+        var loadedSieve = JsonSerializer.Deserialize<bool[]>(File.ReadAllText(sieveFilePath));
 
         return loadedSieve;
     }
