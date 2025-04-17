@@ -10,7 +10,7 @@ where $(p_i, p_j)$ is called Goldbach pair.
 
 Goldbach pair is not unique for some even integers, meaning that there can be multiple goldbach pairs for even integer $N$.
 
-For example: $10=5+5$ and $10 = 3+7$ where goldbach pairs are $(5,5), (3,7), (7,3)$.
+For example:$10=3+7$ and $10=5+5$ and $10=7+3$ where goldbach pairs are $(3,7), (5,5), (7,3)$.
 
 ## Minimal goldbach pair
 
