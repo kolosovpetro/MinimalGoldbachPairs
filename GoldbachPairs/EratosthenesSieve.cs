@@ -8,12 +8,13 @@ namespace GoldbachPairs;
 public static class EratosthenesSieve
 {
     private static readonly JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
-    
-    private const string fileName = "../../../../sieve.json";
-    
-    private static readonly string filePath = Path.Combine(AppContext.BaseDirectory, fileName);
-    
-    
+
+    private const string fileName = "sieve.json";
+
+    private static readonly string filePath = Path.Combine(
+        AppContext.BaseDirectory, "..", "..", "..", "..", fileName);
+
+
     public static bool[] SieveOfEratosthenes(int upperBound)
     {
         var primes = new bool[upperBound + 1];
@@ -82,7 +83,7 @@ public static class EratosthenesSieve
     public static bool[] DeserializeSieve()
     {
         var sieveFilePath = Path.GetFullPath(filePath);
-        
+
         var loadedSieve = JsonSerializer.Deserialize<bool[]>(File.ReadAllText(sieveFilePath));
 
         return loadedSieve;
