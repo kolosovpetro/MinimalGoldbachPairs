@@ -1,44 +1,20 @@
-# .NET project template
+# Goldbach pairs
 
-This is a template for creating .NET projects with compile-time code style checking, CI/CD workflows for Github Actions
-and Azure pipelines.
-Also, includes SonarCloud integration.
+## Definitions
 
-## Nuget packages
+Goldbach conjecture states that every even integer $N$ greater than 2 is a sum of two primes.
 
-### Compile time code style checking
+$$N = p_i + p_j$$
 
-- `Microsoft.CodeAnalysis.NetAnalyzers`
+where $(p_i, p_j)$ is called Goldbach pair.
 
-### Unit tests project
+Goldbach pair is not unique for some even integers, meaning that there can be multiple goldbach pairs for even integer $N$.
 
-- `coverlet.msbuild`
-- `coverlet.collector`
-- `FluentAssertions`
+For example: $10=5+5$ and $10 = 3+7$ where goldbach pairs are $(5,5), (3,7), (7,3)$.
 
-## Required property groups in project file
+## Minimal goldbach pair
 
-```xml
+Minimal goldbach pair is the one which has minimal $p_i$ across all goldbach pairs for even integer $N$.
 
-<PropertyGroup>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisMode>Recommended</AnalysisMode>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-</PropertyGroup>
-```
-
-## Commands
-
-- `dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -p:CoverletOutput=../TestResults`
-- `dotnet tool install --global dotnet-reportgenerator-globaltool --version 4.8.6`
-- `reportgenerator "-reports:TestResults.opencover.xml" "-targetdir:coveragereport" -reporttypes:Html`
-- `dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -p:CoverletOutput=TestResults -p:SkipAutoProps=true -p:Threshold=80`
-
-## Sources
-
-- [Defining formatting rules in .NET with EditorConfig](https://blog.genezini.com/p/defining-formatting-rules-in-.net-with-editorconfig)
-- [Enforcing .NET code style rules at compile time](https://blog.genezini.com/p/enforcing-.net-code-style-rules-at-compile-time)
-- [Analyzing and enforcing .NET code coverage with coverlet](https://blog.genezini.com/p/analyzing-and-enforcing-.net-code-coverage-with-coverlet)
-- [SonarCloud via GitHub Actions](https://github.com/kolosovpetro/SonarCloudViaGithubActions)
-- [How to build a .NET template and use it within Visual Studio. Part 1: Key concepts](https://www.mytechramblings.com/posts/create-dotnet-templates-for-visual-studio-part-1/)
-- [How to build a .NET template and use it within Visual Studio. Part 2: Creating a template package](https://www.mytechramblings.com/posts/create-dotnet-templates-for-visual-studio-part-2/)
+For even integer $10$ we have three pairs $(3,7), (5,5), (7,3)$ while the minimal is $(3,7)$ because 
+$3$ is the minimal value in the $p_i$ set: $3, 5, 7$
