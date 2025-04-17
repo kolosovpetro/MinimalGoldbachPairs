@@ -1,5 +1,6 @@
 using FluentAssertions;
 using GoldbachPairs.Run;
+using System.Linq;
 using Xunit;
 
 namespace GoldbachPairs.Tests;
@@ -137,33 +138,33 @@ public class Tests
         var result = GoldbachHelper.CountMinPairs(n + 3, x) + 1;
         result.Should().Be(expected);
     }
-    
+
     [Theory]
-    [InlineData(2,  1)]
-    [InlineData(3,  2)]
-    [InlineData(4,  2)]
-    [InlineData(5,  3)]
-    [InlineData(6,  3)]
-    [InlineData(7,  4)]
-    [InlineData(8,  4)]
-    [InlineData(9,  4)]
-    [InlineData(10,  4)]
-    [InlineData(11,  5)]
-    [InlineData(12,  5)]
-    [InlineData(13,  6)]
-    [InlineData(14,  6)]
-    [InlineData(15,  6)]
-    [InlineData(16,  6)]
-    [InlineData(17,  7)]
-    [InlineData(18,  7)]
-    [InlineData(19,  8)]
-    [InlineData(20,  8)]
-    [InlineData(21,  8)]
-    [InlineData(22,  8)]
-    [InlineData(23,  9)]
-    [InlineData(24,  9)]
-    [InlineData(25,  9)]
-    [InlineData(26,  9)]
+    [InlineData(2, 1)]
+    [InlineData(3, 2)]
+    [InlineData(4, 2)]
+    [InlineData(5, 3)]
+    [InlineData(6, 3)]
+    [InlineData(7, 4)]
+    [InlineData(8, 4)]
+    [InlineData(9, 4)]
+    [InlineData(10, 4)]
+    [InlineData(11, 5)]
+    [InlineData(12, 5)]
+    [InlineData(13, 6)]
+    [InlineData(14, 6)]
+    [InlineData(15, 6)]
+    [InlineData(16, 6)]
+    [InlineData(17, 7)]
+    [InlineData(18, 7)]
+    [InlineData(19, 8)]
+    [InlineData(20, 8)]
+    [InlineData(21, 8)]
+    [InlineData(22, 8)]
+    [InlineData(23, 9)]
+    [InlineData(24, 9)]
+    [InlineData(25, 9)]
+    [InlineData(26, 9)]
     [InlineData(27, 9)]
     [InlineData(28, 9)]
     [InlineData(29, 10)]
@@ -235,12 +236,29 @@ public class Tests
     [InlineData(95, 24)]
     [InlineData(96, 24)]
     [InlineData(97, 25)]
-    [InlineData(98,  25)]
-    [InlineData(99,  25)]
-    [InlineData(100,  25)]
+    [InlineData(98, 25)]
+    [InlineData(99, 25)]
+    [InlineData(100, 25)]
     public void Test_Prime_Count_From_1_To_100_Sieve(int n, int expected)
     {
         var result = GoldbachHelper.CountPrimesSieve(n);
         result.Should().Be(expected);
+    }
+
+    [Fact]
+    public void Test_Non_Twin_Primes()
+    {
+        var minimalPairs = GoldbachHelper.GetMinimalGoldbachPairs(1_000_000);
+        var minimalPairs7 = minimalPairs.Where(x => x.Value.First().left == 5);
+        var sieve = EratosthenesSieve.SieveOfEratosthenes(1_000_000);
+
+        foreach (var pair in minimalPairs7)
+        {
+            var right = pair.Value.First().right;
+
+            var composite = right + 2;
+
+            sieve[composite].Should().BeFalse();
+        }
     }
 }
