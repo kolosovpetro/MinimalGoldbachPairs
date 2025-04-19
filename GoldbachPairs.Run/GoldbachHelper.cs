@@ -101,7 +101,7 @@ public static class GoldbachHelper
     {
         var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", fileName);
 
-        using var writer = new StreamWriter(path, append: true);
+        using var writer = new StreamWriter(path);
 
         foreach (var kv in dict)
         {
