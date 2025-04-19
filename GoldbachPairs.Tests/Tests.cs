@@ -261,4 +261,40 @@ public class Tests
             sieve[composite].Should().BeFalse();
         }
     }
+
+    [Theory]
+    [InlineData(10)]
+    [InlineData(100)]
+    [InlineData(1000)]
+    [InlineData(10000)]
+    [InlineData(100000)]
+    [InlineData(1000000)]
+    // [InlineData(10000000)]
+    // [InlineData(100000000)]
+    public void Test_Twin_Primes(int bound)
+    {
+        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(bound + 2);
+
+        var primesCount = goldbachPairsMin.Count(x => x.Value.Left == 3);
+        var compositeCount = goldbachPairsMin.Count(x => x.Value.Left == 5);
+
+        var twins = primesCount - compositeCount;
+
+        var countTwinPrimes = GoldbachHelper.CountTwinPrimesSieve(bound + 2);
+
+        twins.Should().Be(countTwinPrimes);
+    }
+    
+    [Theory]
+    [InlineData(10, 4)]
+    [InlineData(100, 25)]
+    [InlineData(1000, 168)]
+    [InlineData(10000, 1229)]
+    [InlineData(100000, 9592)]
+    [InlineData(1000000, 78498)]
+    public void Test_Prime_Count_From_10_To_1_000_000(int n, int expected)
+    {
+        var result = GoldbachHelper.CountMinPairs(n + 3, 3) + 1;
+        result.Should().Be(expected);
+    }
 }

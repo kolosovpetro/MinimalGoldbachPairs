@@ -96,6 +96,25 @@ public static class GoldbachHelper
 
         return count;
     }
+    
+    public static int CountTwinPrimesSieve(int bound)
+    {
+        var primes = EratosthenesSieve.SieveOfEratosthenes(bound);
+
+        var count = 0;
+
+        for (int i = 0; i < primes.Length - 2; i++)
+        {
+            var isTwinPrime = primes[i] && primes[i + 2];
+
+            if (isTwinPrime)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
 
     public static void WriteMinimalGoldbachPairsToFile(string fileName, Dictionary<int, GoldbachPair> dict)
     {
