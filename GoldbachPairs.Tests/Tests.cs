@@ -269,8 +269,8 @@ public class Tests
     [InlineData(10000)]
     [InlineData(100000)]
     [InlineData(1000000)]
-    // [InlineData(10000000)]
-    // [InlineData(100000000)]
+    [InlineData(10000000)]
+    [InlineData(100000000)]
     public void Test_Twin_Primes(int bound)
     {
         var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(bound + 2);

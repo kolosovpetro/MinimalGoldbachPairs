@@ -18,13 +18,13 @@ internal static class Program
         // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000_having_left_11.txt",
         //     goldbachPairsMin.Where(t => t.Value.Left == 11).ToDictionary());
         
-        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(1000);
+        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(20);
 
         var primesCount = goldbachPairsMin.Count(x => x.Value.Left == 3);
         var compositeCount = goldbachPairsMin.Count(x => x.Value.Left == 5);
 
         var twins = primesCount - compositeCount;
 
-        var countTwinPrimes = GoldbachHelper.CountTwinPrimesSieve(1000);
+        var countTwinPrimes = GoldbachHelper.CountTwinPrimesSieve(20);
     }
 }
