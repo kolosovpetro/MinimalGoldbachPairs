@@ -1,4 +1,4 @@
-﻿namespace GoldbachPairs.Run;
+namespace GoldbachPairs.Run;
 
 internal static class Program
 {
@@ -6,7 +6,7 @@ internal static class Program
     {
         var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(10_000);
 
-        goldbachPairsMin.Where(t => t.Value.Left == 3).ToList()
+        goldbachPairsMin.Where(t => t.Value.Left == 5).ToList()
             .ForEach(k => Console.Write($"{k.Value.Right}, "));
         // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000.txt", goldbachPairsMin);
         // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000_having_left_3.txt",

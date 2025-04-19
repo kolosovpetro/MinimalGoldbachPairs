@@ -1,4 +1,4 @@
-﻿namespace GoldbachPairs.Run;
+namespace GoldbachPairs.Run;
 
 public static class GoldbachHelper
 {

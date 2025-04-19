@@ -1,4 +1,4 @@
-﻿name: Resharper Analysis
+name: Resharper Analysis
 
 on:
   push:

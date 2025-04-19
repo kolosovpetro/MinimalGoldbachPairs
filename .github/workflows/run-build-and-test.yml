@@ -1,4 +1,4 @@
-﻿name: Build Test & Drop artifacts
+name: Build Test & Drop artifacts
 
 on:
   push:
