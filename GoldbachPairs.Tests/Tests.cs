@@ -249,12 +249,12 @@ public class Tests
     public void Test_Non_Twin_Primes()
     {
         var minimalPairs = GoldbachHelper.GetMinimalGoldbachPairs(1_000_000);
-        var minimalPairs7 = minimalPairs.Where(x => x.Value.First().left == 5);
+        var minimalPairs7 = minimalPairs.Where(x => x.Value.Left == 5);
         var sieve = EratosthenesSieve.SieveOfEratosthenes(1_000_000);
 
         foreach (var pair in minimalPairs7)
         {
-            var right = pair.Value.First().right;
+            var right = pair.Value.Right;
 
             var composite = right + 2;
 

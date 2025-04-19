@@ -2,7 +2,7 @@
 
 public static class GoldbachHelper
 {
-    public static Dictionary<int, GoldbachPair[]> GetGoldbachPairs(int bound)
+    public static Dictionary<int, GoldbachPair[]> GetAllGoldbachPairs(int bound)
     {
         var primeSieve = EratosthenesSieve.SieveOfEratosthenes(bound);
         var dictionary = new Dictionary<int, GoldbachPair[]>();
@@ -38,11 +38,10 @@ public static class GoldbachHelper
         return dictionary;
     }
 
-    public static Dictionary<int, GoldbachPair[]> GetMinimalGoldbachPairs(int bound)
+    public static Dictionary<int, GoldbachPair> GetMinimalGoldbachPairs(int bound)
     {
         var primeSieve = EratosthenesSieve.SieveOfEratosthenes(bound);
-        var dictionary = new Dictionary<int, GoldbachPair[]>();
-        var list = new List<GoldbachPair>();
+        var dictionary = new Dictionary<int, GoldbachPair>();
 
         for (int i = 4; i <= bound; i += 2)
         {
@@ -62,14 +61,11 @@ public static class GoldbachHelper
 
                 if (bothPrimes)
                 {
-                    list.Add(new GoldbachPair(left, right));
+                    var goldbachPair = new GoldbachPair(left, right);
+                    dictionary.Add(key, goldbachPair);
                     break;
                 }
             }
-
-            dictionary.Add(key, list.ToArray());
-
-            list.Clear();
         }
 
         return dictionary;
@@ -83,7 +79,7 @@ public static class GoldbachHelper
 
         foreach (var pair in goldbachPairs)
         {
-            if (pair.Value.First().left == x)
+            if (pair.Value.Left == x)
             {
                 count++;
             }
@@ -99,5 +95,17 @@ public static class GoldbachHelper
         var count = primes.Count(x => x);
 
         return count;
+    }
+
+    public static void WriteMinimalGoldbachPairsToFile(string fileName, Dictionary<int, GoldbachPair> dict)
+    {
+        var path = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", fileName);
+
+        using var writer = new StreamWriter(path, append: true);
+
+        foreach (var kv in dict)
+        {
+            writer.WriteLine($"{kv.Key} = {kv.Value.Left} + {kv.Value.Right}");
+        }
     }
 }

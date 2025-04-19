@@ -4,15 +4,16 @@ internal static class Program
 {
     public static void Main(string[] args)
     {
-        var primeSieve = EratosthenesSieve.SieveOfEratosthenes(1_000_000);
-        EratosthenesSieve.SerializeSieve(primeSieve);
-
-        var deserializeSieve = EratosthenesSieve.DeserializeSieve();
-
-        var primes = EratosthenesSieve.PrimesList(50).ToList();
-
-        var goldbachPairs = GoldbachHelper.GetGoldbachPairs(50);
-        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(50);
+        // var primeSieve = EratosthenesSieve.SieveOfEratosthenes(1_000_000);
+        // EratosthenesSieve.SerializeSieve(primeSieve);
+        //
+        // var deserializeSieve = EratosthenesSieve.DeserializeSieve();
+        //
+        // var primes = EratosthenesSieve.PrimesList(50).ToList();
+        //
+        // var goldbachPairs = GoldbachHelper.GetAllGoldbachPairs(50);
+        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(10_000);
+        GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000.txt", goldbachPairsMin);
 
         // var count = GoldbachHelper.CountMinPairs(1000000, 3);
         //

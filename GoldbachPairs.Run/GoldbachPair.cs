@@ -1,3 +1,3 @@
 ﻿namespace GoldbachPairs.Run;
 
-public record GoldbachPair(int left, int right);
+public record GoldbachPair(int Left, int Right);
