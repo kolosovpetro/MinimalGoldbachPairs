@@ -263,26 +263,22 @@ public class Tests
     }
 
     [Theory]
-    [InlineData(10)]
-    [InlineData(100)]
-    [InlineData(1000)]
-    [InlineData(10000)]
-    [InlineData(100000)]
-    [InlineData(1000000)]
-    [InlineData(10000000)]
-    [InlineData(100000000)]
-    public void Test_Twin_Primes_Count(int bound)
+    [InlineData(10, 2)]
+    [InlineData(100, 8)]
+    [InlineData(1000, 35)]
+    [InlineData(10000, 205)]
+    [InlineData(100000, 1224)]
+    [InlineData(1000000, 8169)]
+    [InlineData(10000000, 58980)]
+    [InlineData(100000000, 440312)]
+    public void Test_Twin_Primes_Count(int bound, int expected)
     {
-        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(bound + 2);
+        var goldbachPairsMin3 = GoldbachHelper.CountMinPairs(bound + 3, 3);
+        var goldbachPairsMin5 = GoldbachHelper.CountMinPairs(bound + 5, 5);
 
-        var primesCount = goldbachPairsMin.Count(x => x.Value.Left == 3);
-        var compositeCount = goldbachPairsMin.Count(x => x.Value.Left == 5);
+        var twins = goldbachPairsMin3 - goldbachPairsMin5;
 
-        var twins = primesCount - compositeCount;
-
-        var countTwinPrimes = GoldbachHelper.CountTwinPrimesSieve(bound + 2);
-
-        twins.Should().Be(countTwinPrimes);
+        twins.Should().Be(expected);
     }
 
     [Theory]
