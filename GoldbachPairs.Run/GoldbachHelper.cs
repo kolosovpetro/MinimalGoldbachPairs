@@ -71,7 +71,7 @@ public static class GoldbachHelper
         return dictionary;
     }
 
-    public static int CountMinPairs(int n, int x)
+    public static int CountMinimalGoldbachPairsHavingPi(int n, int x)
     {
         var goldbachPairs = GetMinimalGoldbachPairs(n);
 

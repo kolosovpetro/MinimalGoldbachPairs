@@ -4,10 +4,14 @@ internal static class Program
 {
     public static void Main(string[] args)
     {
-        // var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(10_000);
-        //
-        // goldbachPairsMin.Where(t => t.Value.Left == 11).ToList()
-        //     .ForEach(k => Console.Write($"{k.Value.Right}, "));
+        for (int i = 124; i < 250; i+=2)
+        {
+            var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(i);
+            Console.WriteLine($"\nIteration N = {i}");
+            goldbachPairsMin.Where(t => t.Value.Left == 11).ToList()
+                .ForEach(k => Console.Write($"{k.Value.Right}, "));   
+        }
+        
         // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000.txt", goldbachPairsMin);
         // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000_having_left_3.txt",
         //     goldbachPairsMin.Where(t => t.Value.Left == 3).ToDictionary());
@@ -27,14 +31,14 @@ internal static class Program
         //
         // var countTwinPrimes = GoldbachHelper.CountTwinPrimesSieve(20);
 
-        var list = new List<int>();
-
-        for (int i = 3; i < 100; i++)
-        {
-            var count = GoldbachHelper.CountMinPairs( i + 3, 3) + 1;
-            list.Add(count);
-        }
-        
-        list.ForEach(x => Console.Write($"{x}, "));
+        // var list = new List<int>();
+        //
+        // for (int i = 3; i < 100; i++)
+        // {
+        //     var count = GoldbachHelper.CountMinPairs( i + 5, 5) + 1;
+        //     list.Add(count);
+        // }
+        //
+        // list.ForEach(x => Console.Write($"{x}, "));
     }
 }
