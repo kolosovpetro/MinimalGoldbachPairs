@@ -1,4 +1,9 @@
-namespace GoldbachPairs.Run;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace GoldbachPairs;
 
 public static class GoldbachHelper
 {
@@ -96,7 +101,7 @@ public static class GoldbachHelper
 
         return count;
     }
-    
+
     public static int CountTwinPrimesSieve(int bound)
     {
         var primes = EratosthenesSieve.SieveOfEratosthenes(bound);
