@@ -129,4 +129,15 @@ public static class TestData
             new object[] { 99, 25 },
             new object[] { 100, 25 }
         };
+
+    public static IEnumerable<object[]> CountPrimesUpTo10000Step1 => GetCountPrimesUpTo10000Step1();
+
+    private static IEnumerable<object[]> GetCountPrimesUpTo10000Step1()
+    {
+        for (int i = 6; i < 10_000; i++)
+        {
+            var primesCount = GoldbachHelper.CountPrimesSieve(i);
+            yield return new object[] { i, primesCount };
+        }
+    }
 }

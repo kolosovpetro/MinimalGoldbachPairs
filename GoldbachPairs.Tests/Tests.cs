@@ -8,18 +8,18 @@ public class Tests
 {
     [Theory]
     [MemberData(nameof(TestData.PrimeCountTestCases), MemberType = typeof(TestData))]
-    public void Count_Primes_Using_Minimal_Goldbach_Pairs_Pi3(int bound, int totalPrimesExpected)
+    public void Count_Primes_Using_Minimal_Goldbach_Pairs_Up_To_1_500_000(int bound, int totalPrimesExpected)
     {
         var minPairsCount = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(bound + 3, 3) + 1;
         minPairsCount.Should().Be(totalPrimesExpected);
     }
 
     [Theory]
-    [MemberData(nameof(TestData.PrimeCountCasesFrom1To100Step1), MemberType = typeof(TestData))]
-    public void Test_Prime_Count_From_1_To_100(int bound, int totalPrimesExpected)
+    [MemberData(nameof(TestData.CountPrimesUpTo10000Step1), MemberType = typeof(TestData))]
+    public void Count_Primes_Using_Minimal_Goldbach_Pairs_Up_To_10000(int bound, int expected)
     {
         var result = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(bound + 3, 3) + 1;
-        result.Should().Be(totalPrimesExpected);
+        result.Should().Be(expected);
     }
 
     [Theory]
@@ -31,7 +31,7 @@ public class Tests
     }
 
     [Fact]
-    public void Test_Non_Twin_Primes()
+    public void Test_Pi7_Plus_2_Is_Composite()
     {
         var minimalPairs = GoldbachHelper.GetMinimalGoldbachPairs(1_000_000);
         var minimalPairs7 = minimalPairs.Where(x => x.Value.Left == 5);
@@ -49,7 +49,7 @@ public class Tests
 
     [Theory]
     [MemberData(nameof(TestData.TwinPrimesCountTestData), MemberType = typeof(TestData))]
-    public void Test_Twin_Primes_Count(int bound, int expected)
+    public void Count_Twin_Primes_Using_Minimal_Goldbach_Pairs(int bound, int expected)
     {
         var goldbachPairsMin3 = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(bound + 3, 3);
         var goldbachPairsMin5 = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(bound + 5, 5);
@@ -57,18 +57,5 @@ public class Tests
         var twins = goldbachPairsMin3 - goldbachPairsMin5;
 
         twins.Should().Be(expected);
-    }
-
-    [Theory]
-    [InlineData(10, 4)]
-    [InlineData(100, 25)]
-    [InlineData(1000, 168)]
-    [InlineData(10000, 1229)]
-    [InlineData(100000, 9592)]
-    [InlineData(1000000, 78498)]
-    public void Test_Prime_Count_From_10_To_1_000_000(int n, int expected)
-    {
-        var result = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(n + 3, 3) + 1;
-        result.Should().Be(expected);
     }
 }
