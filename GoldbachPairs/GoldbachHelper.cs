@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace GoldbachPairs;
 
@@ -91,5 +92,25 @@ public static class GoldbachHelper
         {
             writer.WriteLine($"{kv.Key} = {kv.Value.Left} + {kv.Value.Right}");
         }
+    }
+
+    public static List<int> GeneratePjSequence(int bound, int pi)
+    {
+        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(bound);
+
+        var result = goldbachPairsMin.Where(t => t.Value.Left == pi)
+            .Select(k => k.Value.Right).ToList();
+
+        return result;
+    }
+
+    public static List<int> Generate2NSequence(int bound, int pi)
+    {
+        var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(bound);
+
+        var result = goldbachPairsMin.Where(t => t.Value.Left == pi)
+            .Select(k => k.Key).ToList();
+
+        return result;
     }
 }

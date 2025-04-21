@@ -7,41 +7,19 @@ internal static class Program
 {
     public static void Main()
     {
-        for (int i = 124; i < 250; i+=2)
-        {
-            var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(i);
-            Console.WriteLine($"\nIteration N = {i}");
-            goldbachPairsMin.Where(t => t.Value.Left == 11).ToList()
-                .ForEach(k => Console.Write($"{k.Value.Right}, "));
-        }
+        var sieve = GoldbachHelper.Primes.SieveOfEratosthenes;
+        var pjSequence = GoldbachHelper
+            .GeneratePjSequence(2000, 5)
+            .Except(GoldbachHelper.GeneratePjSequence(2000, 7))
+            .ToList();
 
-        // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000.txt", goldbachPairsMin);
-        // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000_having_left_3.txt",
-        //     goldbachPairsMin.Where(t => t.Value.Left == 3).ToDictionary());
-        // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000_having_left_5.txt",
-        //     goldbachPairsMin.Where(t => t.Value.Left == 5).ToDictionary());
-        // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000_having_left_7.txt",
-        //     goldbachPairsMin.Where(t => t.Value.Left == 7).ToDictionary());
-        // GoldbachHelper.WriteMinimalGoldbachPairsToFile("min_pairs_up_to_10000_having_left_11.txt",
-        //     goldbachPairsMin.Where(t => t.Value.Left == 11).ToDictionary());
-
-        // var goldbachPairsMin = GoldbachHelper.GetMinimalGoldbachPairs(20);
-        //
-        // var primesCount = goldbachPairsMin.Count(x => x.Value.Left == 3);
-        // var compositeCount = goldbachPairsMin.Count(x => x.Value.Left == 5);
-        //
-        // var twins = primesCount - compositeCount;
-        //
-        // var countTwinPrimes = GoldbachHelper.CountTwinPrimesSieve(20);
-
-        // var list = new List<int>();
-        //
-        // for (int i = 3; i < 100; i++)
+        // for (int i = 0; i < pjSequence.Count-1; i++)
         // {
-        //     var count = GoldbachHelper.CountMinPairs( i + 5, 5) + 1;
-        //     list.Add(count);
-        // }
+        //     var diff = pjSequence[i + 1] - pjSequence[i];
         //
-        // list.ForEach(x => Console.Write($"{x}, "));
+        //     Console.Write($"{diff}, ");
+        // }
+
+         pjSequence.ForEach(x => Console.Write($"{x}, "));
     }
 }
