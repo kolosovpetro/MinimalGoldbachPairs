@@ -47,4 +47,4 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          dotnet test ${{ env.TestProjectPath }} --configuration ${{ env.Configuration }} --logger "trx;LogFileName=test_results.trx" --diag:test-diagnostics.log --no-build
+          dotnet test ${{ env.TestProjectPath }} --configuration ${{ env.Configuration }} --no-build --logger "console;verbosity=detailed"
