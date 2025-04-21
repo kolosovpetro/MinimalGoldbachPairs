@@ -7,9 +7,10 @@ namespace GoldbachPairs;
 
 public static class GoldbachHelper
 {
+    public static EratosthenesSieve Primes { get; } = new();
     public static Dictionary<int, GoldbachPair[]> GetAllGoldbachPairs(int bound)
     {
-        var primeSieve = EratosthenesSieve.SieveOfEratosthenes(bound);
+        var primeSieve = Primes.SieveOfEratosthenes;
         var dictionary = new Dictionary<int, GoldbachPair[]>();
         var list = new List<GoldbachPair>();
 
@@ -45,7 +46,7 @@ public static class GoldbachHelper
 
     public static Dictionary<int, GoldbachPair> GetMinimalGoldbachPairs(int bound)
     {
-        var primeSieve = EratosthenesSieve.SieveOfEratosthenes(bound);
+        var primeSieve = Primes.SieveOfEratosthenes;
         var dictionary = new Dictionary<int, GoldbachPair>();
 
         for (int i = 4; i <= bound; i += 2)
@@ -95,16 +96,30 @@ public static class GoldbachHelper
 
     public static int CountPrimesSieve(int bound)
     {
-        var primes = EratosthenesSieve.SieveOfEratosthenes(bound);
+        var primes = Primes.SieveOfEratosthenes;
 
-        var count = primes.Count(x => x);
+        var count = 0;
+
+        var step = 0;
+
+        while (step <= bound)
+        {
+            var isPrime = primes[step];
+
+            if (isPrime)
+            {
+                count++;
+            }
+
+            step++;
+        }
 
         return count;
     }
 
     public static int CountTwinPrimesSieve(int bound)
     {
-        var primes = EratosthenesSieve.SieveOfEratosthenes(bound);
+        var primes = Primes.SieveOfEratosthenes;
 
         var count = 0;
 

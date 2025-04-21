@@ -5,36 +5,66 @@ using System.Text.Json;
 
 namespace GoldbachPairs;
 
-public static class EratosthenesSieve
+public class EratosthenesSieve
 {
-    private static readonly JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+    private readonly JsonSerializerOptions _options;
 
-    private const string fileName = "sieve.json";
+    private const string FileName = "sieve.json";
 
-    private static readonly string filePath = Path.Combine(
-        AppContext.BaseDirectory, "..", "..", "..", "..", fileName);
+    private const int DefaultSieveSize = 2 * 1_000_000;
 
+    private readonly string _cachedSieveAbsPath;
 
-    public static bool[] SieveOfEratosthenes(int upperBound)
+    public bool[] SieveOfEratosthenes { get; }
+
+    private bool SieveExists => SieveOfEratosthenes != null;
+
+    public EratosthenesSieve()
     {
-        var primes = new bool[upperBound + 1];
+        _options = new JsonSerializerOptions { WriteIndented = true };
+        _cachedSieveAbsPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", FileName));
 
-        for (var i = 0; i < primes.Length; i++)
+        var sieveFileExists = Path.Exists(_cachedSieveAbsPath);
+
+        if (sieveFileExists)
+        {
+            var cachedSieve = DeserializeSieve();
+
+            var sameLength = cachedSieve.Length == DefaultSieveSize + 1;
+
+            if (sameLength)
+            {
+                SieveOfEratosthenes = cachedSieve;
+                return;
+            }
+        }
+
+        SieveOfEratosthenes = GenerateSieveOfEratosthenes(DefaultSieveSize);
+    }
+
+
+    private bool[] GenerateSieveOfEratosthenes(int sieveSize)
+    {
+        if (SieveExists && sieveSize <= DefaultSieveSize)
+        {
+            return SieveOfEratosthenes;
+        }
+
+        var primes = new bool[sieveSize + 1];
+
+        for (var i = 2; i < primes.Length; i++)
         {
             primes[i] = true;
         }
 
-        primes[0] = false;
-        primes[1] = false;
-
-        for (var p = 2; p * p < upperBound; p++)
+        for (var p = 2; p * p < sieveSize; p++)
         {
             if (!primes[p])
             {
                 continue;
             }
 
-            for (var i = p * p; i < upperBound; i += p)
+            for (var i = p * p; i < sieveSize; i += p)
             {
                 primes[i] = false;
             }
@@ -42,7 +72,7 @@ public static class EratosthenesSieve
 
         for (var i = 0; i < primes.Length - 1; i++)
         {
-            var lastItem = upperBound;
+            var lastItem = sieveSize;
 
             if (!primes[i])
             {
@@ -56,12 +86,14 @@ public static class EratosthenesSieve
             }
         }
 
+        SerializeSieve(primes);
+
         return primes;
     }
 
-    public static IEnumerable<int> PrimesList(int upperBound)
+    public IEnumerable<int> PrimesList(int upperBound)
     {
-        var sieve = SieveOfEratosthenes(upperBound);
+        var sieve = GenerateSieveOfEratosthenes(upperBound);
 
         for (var i = 2; i < sieve.Length - 1; i++)
         {
@@ -72,17 +104,17 @@ public static class EratosthenesSieve
         }
     }
 
-    public static void SerializeSieve(bool[] sieve)
+    private void SerializeSieve(bool[] sieve)
     {
-        var sieveFilePath = Path.GetFullPath(filePath);
-        var json = JsonSerializer.Serialize(sieve, options);
+        var sieveFilePath = Path.GetFullPath(_cachedSieveAbsPath);
+        var json = JsonSerializer.Serialize(sieve, _options);
         File.WriteAllText(sieveFilePath, json);
-        Console.WriteLine($"Sieve saved to: {filePath}");
+        Console.WriteLine($"Sieve saved to: {_cachedSieveAbsPath}");
     }
 
-    public static bool[] DeserializeSieve()
+    private bool[] DeserializeSieve()
     {
-        var sieveFilePath = Path.GetFullPath(filePath);
+        var sieveFilePath = Path.GetFullPath(_cachedSieveAbsPath);
 
         var loadedSieve = JsonSerializer.Deserialize<bool[]>(File.ReadAllText(sieveFilePath));
 

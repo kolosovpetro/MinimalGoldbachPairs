@@ -1,5 +1,4 @@
 using FluentAssertions;
-using GoldbachPairs.Run;
 using System.Linq;
 using Xunit;
 
@@ -9,28 +8,26 @@ public class Tests
 {
     [Theory]
     [MemberData(nameof(TestData.PrimeCountTestCases), MemberType = typeof(TestData))]
-    public void Test_Prime_Numbers_Count_Pi_n(int n, int x, int expected)
+    public void Count_Primes_Using_Minimal_Goldbach_Pairs_Pi3(int bound, int totalPrimesExpected)
     {
-        var minPairsCount = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(n + 3, x) + 1;
-
-        minPairsCount.Should().Be(expected);
+        var minPairsCount = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(bound + 3, 3) + 1;
+        minPairsCount.Should().Be(totalPrimesExpected);
     }
 
     [Theory]
     [MemberData(nameof(TestData.PrimeCountCasesFrom1To100Step1), MemberType = typeof(TestData))]
-    public void Test_Prime_Count_From_1_To_100(int n, int x, int expected)
+    public void Test_Prime_Count_From_1_To_100(int bound, int totalPrimesExpected)
     {
-        var result = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(n + 3, x) + 1;
-        result.Should().Be(expected);
+        var result = GoldbachHelper.CountMinimalGoldbachPairsHavingPi(bound + 3, 3) + 1;
+        result.Should().Be(totalPrimesExpected);
     }
 
     [Theory]
     [MemberData(nameof(TestData.PrimeCountCasesFrom1To100Step1), MemberType = typeof(TestData))]
-    public void Test_Prime_Count_From_1_To_100_Sieve(int n, int x, int expected)
+    public void Test_Prime_Count_From_1_To_100_Sieve(int bound, int totalPrimesExpected)
     {
-        var result = GoldbachHelper.CountPrimesSieve(n);
-        result.Should().Be(expected);
-        x.Should().Be(3);
+        var result = GoldbachHelper.CountPrimesSieve(bound);
+        result.Should().Be(totalPrimesExpected);
     }
 
     [Fact]
@@ -38,7 +35,7 @@ public class Tests
     {
         var minimalPairs = GoldbachHelper.GetMinimalGoldbachPairs(1_000_000);
         var minimalPairs7 = minimalPairs.Where(x => x.Value.Left == 5);
-        var sieve = EratosthenesSieve.SieveOfEratosthenes(1_000_000);
+        var sieve = GoldbachHelper.Primes.SieveOfEratosthenes;
 
         foreach (var pair in minimalPairs7)
         {
