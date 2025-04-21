@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
@@ -89,19 +88,6 @@ public class EratosthenesSieve
         SerializeSieve(primes);
 
         return primes;
-    }
-
-    public IEnumerable<int> PrimesList(int upperBound)
-    {
-        var sieve = GenerateSieveOfEratosthenes(upperBound);
-
-        for (var i = 2; i < sieve.Length - 1; i++)
-        {
-            if (sieve[i])
-            {
-                yield return i;
-            }
-        }
     }
 
     private void SerializeSieve(bool[] sieve)
