@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec
 - Updates in CI
 - Move helper files to package
 - Optimize tests
+- Order tests reflection

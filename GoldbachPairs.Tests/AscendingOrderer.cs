@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -12,7 +13,7 @@ public class AscendingOrderer : ITestCaseOrderer
     {
         var orderedCases = testCases
             .OrderBy(tc => tc.TestMethod.Method.Name)
-            .ThenBy(tc => tc.TestMethodArguments.FirstOrDefault());
+            .ThenBy(tc => tc.TestMethodArguments?.FirstOrDefault() as int? ?? 0);
 
         return orderedCases;
     }

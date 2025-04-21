@@ -4,6 +4,7 @@ using Xunit;
 
 namespace GoldbachPairs.Tests;
 
+[TestCaseOrderer("GoldbachPairs.Tests.AscendingOrderer", "GoldbachPairs.Tests")]
 public class Tests
 {
     [Theory]
