@@ -14,3 +14,12 @@ var pjSequence = GoldbachHelper
             .Except(GoldbachHelper.GeneratePjSequence(1000, 7))
             .ToList();
 ```
+
+Gives https://oeis.org/A124589
+```csharp
+        var pjSequence =
+            GoldbachHelper
+                .GeneratePjSequence(2000, 3)
+                .Except(GoldbachHelper.GeneratePjSequence(2000, 7))
+                .ToList();
+```
