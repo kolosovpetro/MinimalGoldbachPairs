@@ -8,10 +8,12 @@ internal static class Program
     public static void Main()
     {
         var sieve = GoldbachHelper.Primes.SieveOfEratosthenes;
+
+
         var pjSequence =
             GoldbachHelper
-                .GeneratePjSequence(2000, 3)
-                .Except(GoldbachHelper.GeneratePjSequence(2000, 7))
+                .GeneratePjSequence(2000, 7)
+                // .Except(GoldbachHelper.GeneratePjSequence(2000, 11))
                 .ToList();
 
         // for (int i = 0; i < 2000; i++)
@@ -43,6 +45,6 @@ internal static class Program
         //     Console.Write($"power: {power}: {result}, ");
         // }
 
-         pjSequence.ForEach(x => Console.Write($"{x}, "));
+        pjSequence.ForEach(x => Console.Write($"{x}, "));
     }
 }

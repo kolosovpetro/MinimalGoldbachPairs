@@ -42,15 +42,15 @@ public static class GoldbachHelper
         return dictionary;
     }
 
-    public static int CountMinimalGoldbachPairsHavingPi(int n, int x)
+    public static int CountMinimalGoldbachPairsHavingPi(int bound, int p)
     {
-        var goldbachPairs = GetMinimalGoldbachPairs(n);
+        var goldbachPairs = GetMinimalGoldbachPairs(bound);
 
         var count = 0;
 
         foreach (var pair in goldbachPairs)
         {
-            if (pair.Value.Left == x)
+            if (pair.Value.Left == p)
             {
                 count++;
             }
